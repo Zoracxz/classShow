@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 映射文件配置，namespace指向接口 -->
+<mapper namespace="com.zora.example.mapper.AddpartMapper">
+    <!--
+        select标签代表查询
+        findById要与接口中的方法名一致
+    -->
+    <select id="findById" parameterType="Integer" resultType="com.zora.example.entity.Emp">
+        select * from emp where empno = #{value}
+    </select>
+    <!-- selectKey代表将id回填，Last_Insert_ID用于获取最新插入的id select Last_Insert_ID()是mysql的内置函数 -->
+    <insert id="addEmp" parameterType="com.zora.example.entity.Emp">
+        INSERT INTO `scott`.`emp` ( `ename`, `job`, `mgr`, `hiredate`, `sal`, `comm`, `deptno`)
+        VALUES (#{ename}, #{job}, #{mgr}, #{hiredate}, #{sal}, #{comm}, #{deptno})
+        <selectKey keyProperty="empno" keyColumn="empno" resultType="Integer" order="AFTER">
+            select Last_Insert_ID()
+        </selectKey>
+    </insert>
+    <select id="findAll" resultType="com.zora.example.entity.Emp">
+        select * from emp
+    </select>
+</mapper>

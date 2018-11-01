@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<!--最重要的是要引入thymeleaf的命名空间 -->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <!--th:text="#{app.report.name}"-->
+    <title>[[#{app.report.name}]]</title>
+    <link href="css/bootstrap.css" type="text/css" rel="stylesheet"></link>
+    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <style type="text/css">
+        .pagination > li > a, .pagination > li > span {
+            margin: 0 5px;
+            border: 1px solid #dddddd;
+        }
+        .col-center-block {
+            float: none;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+    </style>
+</head>
+<body>
+<!-- 引用模板 模板引用表达式为 页面名 :: 片段id-->
+<div th:insert="header_footer :: header"></div>
+<div class="container">
+    <div class="row">
+        <div>
+            <ol class="breadcrumb" style="background-color:transparent;font-size: 20px">
+                <!-- th:href相当于动态生成href属性 -->
+                <li><a th:href="#{app.website}">首页</a></li>
+                <li class="active">展示</li>
+                <li class="active">thymeleaf</li>
+            </ol>
+        </div>
+        <div class="col-xs-8 col-md-offset-12 col-center-block">
+            <form class="form-horizontal" id="addEmp" th:action="@{/addemp}" th:method="post" th:object="${emp}">
+                <div class="row form-group">
+                    <label class="control-label col-lg-1" for="empno">员工编号</label>
+                    <div class="col-lg-5 col-md-6">
+                        <input class="form-control" type="number" name="empno" value="" id="empno" th:field="*{empno}"/>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="control-label col-lg-1">姓名</label>
+                    <div class="col-lg-5 col-md-6">
+                        <input class="form-control" type="text" name="ename" value="" th:field="*{ename}"/>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="control-label col-lg-1">岗位</label>
+                    <div class="col-lg-5 col-md-6">
+                        <input class="form-control" type="text" name="job" value="" th:field="*{job}"/>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="control-label col-lg-1">经理</label>
+                    <div class="col-lg-5 col-md-6">
+                        <input class="form-control" type="number" name="mgr" value="" th:field="*{mgr}"/>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="control-label col-lg-1">入职时间</label>
+                    <div class="col-lg-5 col-md-6">
+                        <input class="form-control" type="date" name="hiredate" value="" th:field="*{hiredate}"/>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="control-label col-lg-1">工资</label>
+                    <div class="col-lg-5 col-md-6">
+                        <input class="form-control" type="number" name="sal" value="" th:field="*{sal}"/>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="control-label col-lg-1">奖金</label>
+                    <div class="col-lg-5 col-md-6">
+                        <input class="form-control" type="number" name="comm" value="" th:field="*{comm}"/>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="control-label col-lg-1">部门</label>
+                    <div class="col-lg-5 col-md-6">
+                        <input class="form-control" type="number" name="deptno" value="" th:field="*{deptno}"/>
+                    </div>
+                </div>
+                <div>
+                    <input class="btn btn-default" type="submit" value="添加"/>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
